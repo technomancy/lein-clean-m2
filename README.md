@@ -8,6 +8,8 @@ used for a single project.
 
 ## Usage
 
+Add `[lein-clean-m2 "0.1.1"]` to `:plugins` in `project.clj`, then run
+
     $ lein clean-m2
 
 ## License

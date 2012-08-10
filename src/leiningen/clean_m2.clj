@@ -1,5 +1,6 @@
 (ns leiningen.clean-m2
   (:require [leiningen.core.classpath :as cp]
+            [leiningen.core.main :as main]
             [clojure.java.io :as io]))
 
 (def local-repo (io/file (System/getProperty "user.home") ".m2" "repository"))
@@ -22,6 +23,6 @@ Don't use this in a user account unless it's only used for a single project."
         used? (set (map (partial coords local-repo) artifacts))]
     (doseq [f (file-seq (io/file local-repo))
             :when (and (not (used? (coords local-repo f))) (.isFile f))]
-      (println "Unused:" (str f))
+      (main/debug "Unused:" (str f))
       (when-not dry-run?
         (io/delete-file f)))))
